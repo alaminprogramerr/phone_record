@@ -41,6 +41,7 @@ const clientSchema= new Schema({
     },
     // fault details
     faultName:String,
+    description:String,
     faultDescription: String,
     
     // progress life cycle

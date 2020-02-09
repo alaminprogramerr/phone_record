@@ -3,52 +3,15 @@ const clientModel =require('../models/clientModel')
 const bcrypt =require('bcryptjs')
 const mongoose =require('mongoose') 
 const createClient=(req,res)=>{
-    console.log(req.body)
-    let {
-         name, 
-        address, 
-        contactNumber,
-        brand,
-        color,
-        type,
-        IMEI,
-        state,
-        ID,
-        faultName,
-        faultDescription
+    let  {  name,   address,   contactNumber , brand , color , type , IMEI , state , ID , faultName , faultDescription , description
     } = req.body
 
-    let validate = validator.client({
-        
-        name, 
-        address, 
-        contactNumber,
-        brand,
-        color,
-        type,
-        IMEI,
-        state,
-        ID,
-        faultName,
-        faultDescription
+    let validate = validator.client( { name,   address,   contactNumber , brand , color , type , IMEI , state , ID , faultName , faultDescription , description
     })
     
-    if (!validate.isValid) {
-        return res.status(400).json(validate.err)
+    if (!validate.isValid)  { return res.status(400).json(validate.err)
     } 
-    let clientObj  = { 
-        
-        name, 
-        address, 
-        contactNumber,
-        brand,
-        color,
-        type,
-        IMEI,
-        state,
-        ID,
-        faultName,
-        faultDescription,
+    let clientObj  = {  description, name,   address,   contactNumber , brand , color , type , IMEI , state , ID , faultName , faultDescription,
         
         // progress life cycle
         
@@ -80,7 +43,6 @@ const createClient=(req,res)=>{
 
 // addStatus
 const addStatusToFaultSearch=(req, res)=>{
-    console.log('adding status')
     
      clientModel.findOne({_id:req.params.id})
      .then(client=>{
@@ -91,7 +53,6 @@ const addStatusToFaultSearch=(req, res)=>{
                 res.status(200).json({massage:"Status added", updated})
             })
             .catch(err=>{
-                console.log(err)
                 res.status(500).json({massage:"server error"})
             })
         }else{
@@ -99,7 +60,6 @@ const addStatusToFaultSearch=(req, res)=>{
         }
      })
      .catch(err=>{
-         console.log(err)
          res.json({massage:'erroro'})
      })
  }
@@ -115,7 +75,6 @@ const addStatusToFaultSearch=(req, res)=>{
          res.status(200).json({searched:searched})
      })
      .catch(err=>{
-         console.log(err)
          res.status(500).json({massage:"server error occurd"})
      })
  }
@@ -131,7 +90,6 @@ const sentestimate=(req, res)=>{
                 res.status(200).json({massage:"Estimate Sent ", updated})
             })
             .catch(err=>{
-                console.log(err)
                 res.status(500).json({massage:"server error"})
             })
         }else{
@@ -139,7 +97,6 @@ const sentestimate=(req, res)=>{
         }
      })
      .catch(err=>{
-         console.log(err)
          res.json({massage:'erroro'})
      })
  }
@@ -150,14 +107,13 @@ const sentestimate=(req, res)=>{
         
         let searched=[]
         clients.forEach(single=>{
-            if(single.estimatesent==true || single.estimatesent==null){
+            if(single.estimatesent==true ){
                 searched.push(single)
             }
         })
         res.status(200).json({client:searched})
     })
     .catch(err=>{
-        console.log(err)
         res.status(500).json({massages:"server error occure"})
     })
 }
@@ -174,7 +130,6 @@ const doEstimateAccepted=(req, res)=>{
                res.status(200).json({massage:"done accepted Sent ", updated})
            })
            .catch(err=>{
-               console.log(err)
                res.status(500).json({massage:"server error"})
            })
        }else{
@@ -182,7 +137,6 @@ const doEstimateAccepted=(req, res)=>{
        }
     })
     .catch(err=>{
-        console.log(err)
         res.json({massage:'erroro'})
     })
 }
@@ -199,7 +153,6 @@ const doEstimateRefused=(req, res)=>{
                res.status(200).json({massage:"done refused Sent ", updated})
            })
            .catch(err=>{
-               console.log(err)
                res.status(500).json({massage:"server error"})
            })
        }else{
@@ -207,7 +160,6 @@ const doEstimateRefused=(req, res)=>{
        }
     })
     .catch(err=>{
-        console.log(err)
         res.json({massage:'erroro'})
     })
 }
@@ -225,7 +177,43 @@ const getAllInProgress=(req, res)=>{
         res.status(200).json({client:progress})
     })
     .catch(err=>{
-        console.log(err)
+        res.status(500).json({massage:"server error occurd"})
+    })
+}
+
+
+const getAllInrefused=(req, res)=>{
+    clientModel.find()
+    .then(clients=>{ 
+        let bunced=[]
+        clients.forEach(single=>{
+            if(single.bouncedDeliver==true){
+                bunced.push(single)
+                console.log(single)
+            }
+        })
+        console.log(bunced)
+        res.status(200).json({client:bunced})
+    })
+    .catch(err=>{
+        res.status(500).json({massage:"server error occurd"})
+    })
+}
+
+
+
+const getAllEstimateAccpted=(req, res)=>{
+    clientModel.find()
+    .then(clients=>{
+        let progress=[]
+        clients.forEach(single=>{
+            if(single.estimateAccepted==true){
+                progress.push(single)
+            }
+        })
+        res.status(200).json({client:progress})
+    })
+    .catch(err=>{
         res.status(500).json({massage:"server error occurd"})
     })
 }
@@ -235,7 +223,6 @@ const getAllInProgress=(req, res)=>{
 
 
 const addStatusInProgress=(req, res)=>{
-    console.log('adding status')
     
      clientModel.findOne({_id:req.params.id})
      .then(client=>{
@@ -246,7 +233,6 @@ const addStatusInProgress=(req, res)=>{
                 res.status(200).json({massage:"Status added to progress statss", updated})
             })
             .catch(err=>{
-                console.log(err)
                 res.status(500).json({massage:"server error"})
             })
         }else{
@@ -254,10 +240,31 @@ const addStatusInProgress=(req, res)=>{
         }
      })
      .catch(err=>{
-         console.log(err)
          res.json({massage:'erroro'})
      })
  }
+
+
+ 
+
+const getallrepaired=(req, res)=>{
+    clientModel.find()
+    .then(clients=>{
+        let deliverd=[]
+        clients.forEach(single=>{
+            if(single.repaireDone==true){
+                deliverd.push(single)
+            }
+        })
+        res.status(200).json({client:deliverd})
+    })
+    .catch(err=>{
+        res.status(500).json({massage:"server error occurd"})
+    })
+}
+
+
+
 const doDeliverd=(req, res)=>{
     clientModel.findOne({_id:req.params.id})
     .then(client=>{
@@ -269,7 +276,6 @@ const doDeliverd=(req, res)=>{
                res.status(200).json({massage:"done repaire ", updated})
            })
            .catch(err=>{
-               console.log(err)
                res.status(500).json({massage:"server error"})
            })
        }else{
@@ -277,7 +283,31 @@ const doDeliverd=(req, res)=>{
        }
     })
     .catch(err=>{
-        console.log(err)
+        res.json({massage:'erroro'})
+    })
+}
+
+
+
+
+const doRepaired=(req, res)=>{
+    clientModel.findOne({_id:req.params.id})
+    .then(client=>{
+        if(client){
+           client.repaireDone=true
+           client.repaireProgress=null
+           client.save()
+           .then(updated=>{
+               res.status(200).json({massage:"done repaire ", updated})
+           })
+           .catch(err=>{
+               res.status(500).json({massage:"server error"})
+           })
+       }else{
+           res.status(400).json({massage:"transection not found"})
+       }
+    })
+    .catch(err=>{
         res.json({massage:'erroro'})
     })
 }
@@ -298,7 +328,6 @@ const getDelivered=(req, res)=>{
         res.status(200).json({client:deliverd})
     })
     .catch(err=>{
-        console.log(err)
         res.status(500).json({massage:"server error occurd"})
     })
 }
@@ -318,7 +347,6 @@ const doAccept=(req, res)=>{
                res.status(200).json({massage:"done repaire ", updated})
            })
            .catch(err=>{
-               console.log(err)
                res.status(500).json({massage:"server error"})
            })
        }else{
@@ -326,7 +354,6 @@ const doAccept=(req, res)=>{
        }
     })
     .catch(err=>{
-        console.log(err)
         res.json({massage:'erroro'})
     })
 }
@@ -347,7 +374,6 @@ const getAccepted=(req, res)=>{
         res.status(200).json({client:accepted})
     })
     .catch(err=>{
-        console.log(err)
         res.status(500).json({massage:"server error occurd"})
     })
 }
@@ -360,10 +386,6 @@ const doRefused=(req, res)=>{
     clientModel.findOne({_id:req.params.id})
     .then(client=>{
         if(client){
-           client.repaireDone=null
-           client.delivered=null
-           client.acceptedDeliver=false,
-           client.faultSearch=true
            client.cycle=true
            client.refusedDeliver=true
            client.save()
@@ -371,7 +393,6 @@ const doRefused=(req, res)=>{
                res.status(200).json({massage:"refused repaire ", updated})
            })
            .catch(err=>{
-               console.log(err)
                res.status(500).json({massage:"server error"})
            })
        }else{
@@ -379,11 +400,9 @@ const doRefused=(req, res)=>{
        }
     })
     .catch(err=>{
-        console.log(err)
         res.json({massage:'erroro'})
     })
 }
-
 
 
 
@@ -400,15 +419,9 @@ const getRefused=(req, res)=>{
         res.status(200).json({client:refused})
     })
     .catch(err=>{
-        console.log(err)
         res.status(500).json({massage:"server error occurd"})
     })
 }
-
-
-
-
-
 
 const getSingle=(req, res)=>{
     clientModel.findOne({_id:req.params.id})
@@ -416,15 +429,9 @@ const getSingle=(req, res)=>{
         res.status(200).json({client:clients})
     })
     .catch(err=>{
-        console.log(err)
         res.status(500).json({massage:"server error occurd"})
     })
 }
-
-
-
-
-
 
 
  
@@ -445,6 +452,15 @@ module.exports={
     doRefused:doRefused,
     getRefused:getRefused,
     getSingle:getSingle
+
+    ,
+
+
+    getAllInrefused:getAllInrefused,
+    getAllEstimateAccpted:getAllEstimateAccpted,
+    doRepaired:doRepaired,
+    getallrepaired:getallrepaired
+
 }
 
 

@@ -27,13 +27,21 @@ userRouter.get('/doEstimateAccepted/:id', clientController.doEstimateAccepted)
 userRouter.get('/doEstimateRefused/:id', clientController.doEstimateRefused)
 userRouter.get ('/getAllInProgress', clientController.getAllInProgress)
 userRouter.post ('/addStatusInProgress/:id', clientController.addStatusInProgress)
-userRouter.get('/doDelivered/:id',clientController.doDeliverd )
+userRouter.get('/doDeliverd/:id',clientController.doDeliverd )
 userRouter.get('/getalldelivered',clientController.getDelivered )
 userRouter.get('/doAccept/:id',clientController.doAccept )
 userRouter.get('/getAccepted', clientController.getAccepted)
 userRouter.get('/doRefused/:id', clientController.doRefused)
 userRouter.get('/getRefused', clientController.getRefused)
 userRouter.get('/getSingle/:id', clientController.getSingle)
+
+
+userRouter.get('/getAllInrefused', clientController.getAllInrefused)
+userRouter.get('/getAllEstimateAccpted', clientController.getAllEstimateAccpted)
+userRouter.get('/doRepaired/:id', clientController.doRepaired)
+userRouter.get('/getallrepaired', clientController.getallrepaired)
+
+
 
 
 

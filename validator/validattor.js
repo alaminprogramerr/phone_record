@@ -47,6 +47,9 @@ const client=(info)=>{
 //     name of fault 
 //     descriptionof fault 
     const err={}
+    if(!info.description){
+        err.description="Description"
+    }
     if(!info.brand){
         err.brand="Brand requird"
     }

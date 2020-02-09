@@ -4,55 +4,61 @@ import { Redirect } from "react-router-dom";
 // Layout Types
 import { DefaultLayout } from "./layouts";
 
-// Route Views
-import BlogOverview from "./views/BlogOverview";
-import UserProfileLite from "./views/UserProfileLite";
-import AddNewPost from "./views/AddNewPost";
-import Errors from "./views/Errors";
-import ComponentsOverview from "./views/ComponentsOverview";
-import Tables from "./views/Tables";
-import BlogPosts from "./views/BlogPosts";
+import AddClient from "./views/AddClient";
+import FaultSearching from "./views/FaultSearching";
+import EstimateSent from "./views/EstimateSent";
+import EstimateRefused from "./views/EstimateRefused";
+// import EstimateApreved from "./views/EstimateApreved";
+import RepaireInProgress from "./views/RepaireInProgress";
+import RepaireDone from "./views/RepaireDone";
+import DeliveredToCustomer from "./views/DeliveredToCustomer";
+import BuncedByCustomer from "./views/BuncedByCustomer";
 
 export default [
   {
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/blog-overview" />
+    component: () => <Redirect to="/addclient" />
   },
   {
-    path: "/blog-overview",
+    path: "/addclient",
     layout: DefaultLayout,
-    component: BlogOverview
+    component: AddClient
   },
   {
-    path: "/user-profile-lite",
+    path: "/faultSearch",
     layout: DefaultLayout,
-    component: UserProfileLite
+    component: FaultSearching
   },
   {
-    path: "/add-new-post",
+    path: "/estimatesent",
     layout: DefaultLayout,
-    component: AddNewPost
+    component: EstimateSent
   },
   {
-    path: "/errors",
+    path: "/estimaterefused",
     layout: DefaultLayout,
-    component: Errors
+    component: EstimateRefused
   },
   {
-    path: "/components-overview",
+    path: "/repaireinprogress",
     layout: DefaultLayout,
-    component: ComponentsOverview
+    component: RepaireInProgress
   },
   {
-    path: "/tables",
+    path: "/repairedone",
     layout: DefaultLayout,
-    component: Tables
+    component:RepaireDone
   },
   {
-    path: "/blog-posts",
+    path: "/deliveredcustomer",
     layout: DefaultLayout,
-    component: BlogPosts
+    component: DeliveredToCustomer
+  },
+  {
+    path: "/buncedbycustomer",
+    layout: DefaultLayout,
+    component: BuncedByCustomer
   }
 ];

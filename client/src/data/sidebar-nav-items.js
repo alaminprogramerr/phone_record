@@ -3,48 +3,42 @@ export default function() {
     {
       title: "Add New Customer",
       htmlBefore: '<i class="material-icons">note_add</i>',
-      to: "/add-new-post",
+      to: "/addclient",
     },
     {
       title: "Fault Sarching ",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
+      to: "/faultSearch",
     },
     {
       title: "Estimate Sent ",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
+      to: "/estimatesent",
     },
     {
       title: "Estimate Refused ",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
-    },
-
-    {
-      title: "Estimate Accepted",
-      htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
+      to: "/estimaterefused",
     },
     {
       title: "Repair in Progress ",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
+      to: "/repaireinprogress",
     },
     {
       title: "Repaire Done",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
+      to: "/repairedone",
     },
     {
       title: "Deliverd to Customer ",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
+      to: "/deliveredcustomer",
     },
     {
       title: "Bounced by customer ",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
+      to: "/buncedbycustomer",
     },
 
     // {
